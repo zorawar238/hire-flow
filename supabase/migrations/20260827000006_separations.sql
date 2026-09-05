@@ -1,4 +1,4 @@
--- Separation Management Schema
+﻿-- Separation Management Schema
 
 CREATE TYPE separation_type AS ENUM ('RESIGNATION', 'TERMINATION');
 CREATE TYPE separation_status AS ENUM ('PENDING', 'APPROVED', 'COMPLETED');
@@ -42,3 +42,4 @@ FOR EACH ROW EXECUTE PROCEDURE update_updated_at_column();
 -- Enable RLS
 ALTER TABLE public.separations ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.offboarding_tasks ENABLE ROW LEVEL SECURITY;
+

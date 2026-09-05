@@ -1,4 +1,4 @@
--- Initial Schema for HireFlow AI MVP
+﻿-- Initial Schema for HireFlow AI MVP
 
 -- Enable UUID extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
@@ -119,3 +119,4 @@ ALTER TABLE public.jobs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.candidates ENABLE ROW LEVEL SECURITY;
 
 -- Note: Proper RLS policies should be defined in a separate migration based on org isolation requirements.
+

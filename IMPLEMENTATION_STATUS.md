@@ -88,18 +88,16 @@ This document tracks the progress of the HireFlow AI implementation against the 
 
 ---
 
-## ⏳ Phase 6: Performance Management
+## ✅ Phase 6: Performance Management
 
-**Status:** Not Started
+**Status:** Completed
 
-### Planned Features:
-* Goals (OKRs)
-* Performance reviews
-* 360-degree feedback
-* Continuous feedback
-* 1-on-1 meeting notes
-* Career paths
-
+### Implemented Features:
+* **Goals (OKRs)**: Implemented tracking and progress updates.
+* **Performance Reviews**: Added ability for managers to submit cyclical ratings and comments.
+* **Continuous & 360 Feedback**: Added UI to log feedback anytime.
+* **1-on-1 Meeting Notes**: Added logging for regular manager check-ins.
+* **Career Paths**: Integrated schema and actions for role transitions.
 ---
 
 ## ⏳ Phase 7: Analytics & AI Insights

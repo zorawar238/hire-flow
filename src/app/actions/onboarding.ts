@@ -26,14 +26,16 @@ export async function createOrganizationAction(data: any) {
     return { error: orgError.message }
   }
 
-  // 2. Update User Profile
+  // 2. Upsert User Profile
   const { error: userError } = await supabase
     .from('users')
-    .update({
+    .upsert({
+      id: authData.user.id,
+      email: authData.user.email!,
+      name: authData.user.user_metadata?.full_name || authData.user.email?.split('@')[0] || 'User',
       organization_id: orgData.id,
       role: 'ORG_ADMIN',
     })
-    .eq('id', authData.user.id)
 
   if (userError) {
     return { error: userError.message }

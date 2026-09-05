@@ -1,4 +1,4 @@
--- Preboarding and Employee Conversion Schema
+﻿-- Preboarding and Employee Conversion Schema
 
 CREATE TYPE task_type AS ENUM ('CANDIDATE', 'INTERNAL');
 CREATE TYPE task_status AS ENUM ('PENDING', 'COMPLETED');
@@ -60,3 +60,4 @@ FOR EACH ROW EXECUTE PROCEDURE update_updated_at_column();
 ALTER TABLE public.onboarding_tasks ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.candidate_documents ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.employees ENABLE ROW LEVEL SECURITY;
+

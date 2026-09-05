@@ -57,7 +57,7 @@ CREATE TABLE public.meeting_notes (
 CREATE TABLE public.career_paths (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     employee_id UUID REFERENCES public.employees(id) ON DELETE CASCADE,
-    current_role TEXT NOT NULL,
+    "current_role" TEXT NOT NULL,
     target_role TEXT NOT NULL,
     skills_needed TEXT[],
     target_date DATE,
@@ -78,3 +78,4 @@ ALTER TABLE public.performance_reviews ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.employee_feedback ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.meeting_notes ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.career_paths ENABLE ROW LEVEL SECURITY;
+

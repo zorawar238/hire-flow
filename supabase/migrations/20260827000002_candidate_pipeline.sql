@@ -1,4 +1,4 @@
--- Candidate Pipeline and Resumes Schema
+﻿-- Candidate Pipeline and Resumes Schema
 
 CREATE TYPE pipeline_stage AS ENUM (
     'APPLIED',
@@ -53,3 +53,4 @@ ALTER TABLE public.resumes ENABLE ROW LEVEL SECURITY;
 -- Note: We assume the storage bucket "resumes" is created either via the dashboard or a separate storage seed script.
 -- If running locally, you can create it via:
 -- INSERT INTO storage.buckets (id, name, public) VALUES ('resumes', 'resumes', false);
+

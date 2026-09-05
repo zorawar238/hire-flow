@@ -1,4 +1,4 @@
--- Interviews and Offers Schema
+﻿-- Interviews and Offers Schema
 
 CREATE TYPE interview_status AS ENUM (
     'SCHEDULED',
@@ -58,3 +58,4 @@ FOR EACH ROW EXECUTE PROCEDURE update_updated_at_column();
 -- Enable RLS
 ALTER TABLE public.interviews ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.offers ENABLE ROW LEVEL SECURITY;
+

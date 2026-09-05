@@ -1,4 +1,4 @@
-import Link from "next/link"
+import { Sidebar } from "./sidebar"
 
 export default function DashboardLayout({
   children,
@@ -6,50 +6,27 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex min-h-screen">
-      {/* Sidebar */}
-      <aside className="w-64 bg-gray-900 text-white flex flex-col">
-        <div className="p-6 text-2xl font-bold border-b border-gray-800">
-          HireFlow AI
-        </div>
-        <nav className="flex-1 p-4 space-y-2">
-          <Link href="/dashboard" className="block px-4 py-2 rounded hover:bg-gray-800">
-            Overview
-          </Link>
-          <Link href="/dashboard/jobs" className="block px-4 py-2 rounded hover:bg-gray-800">
-            Jobs
-          </Link>
-          <Link href="/dashboard/candidates" className="block px-4 py-2 rounded hover:bg-gray-800">
-            Candidates
-          </Link>
-          <Link href="/dashboard/interviews" className="block px-4 py-2 rounded hover:bg-gray-800">
-            Interviews
-          </Link>
-          <Link href="/dashboard/employees" className="block px-4 py-2 rounded hover:bg-gray-800">
-            Employees
-          </Link>
-          <Link href="/dashboard/settings" className="block px-4 py-2 rounded hover:bg-gray-800">
-            Settings
-          </Link>
-        </nav>
-        <div className="p-4 border-t border-gray-800">
-          <div className="text-sm">Logged in as</div>
-          <div className="font-medium truncate">john@example.com</div>
-        </div>
-      </aside>
-
+    <div className="flex h-screen overflow-hidden bg-slate-50 text-slate-900">
+      <Sidebar />
+      
       {/* Main Content */}
-      <main className="flex-1 bg-gray-50 flex flex-col">
+      <main className="flex-1 flex flex-col min-w-0">
         {/* Top Header */}
-        <header className="h-16 bg-white border-b flex items-center px-6 justify-between">
-          <h1 className="text-xl font-semibold text-gray-800">Workspace</h1>
-          <div>
-            <button className="text-gray-500 hover:text-gray-700">Logout</button>
+        <header className="h-16 bg-white/80 backdrop-blur-md border-b border-slate-200 flex items-center px-8 justify-between sticky top-0 z-10">
+          <h1 className="text-xl font-bold text-slate-800 tracking-tight">Workspace</h1>
+          <div className="flex items-center gap-4">
+            <button className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
+              Help
+            </button>
+            <div className="h-4 w-px bg-slate-200" />
+            <button className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
+              Logout
+            </button>
           </div>
         </header>
 
         {/* Page Content */}
-        <div className="p-6 flex-1 overflow-auto">
+        <div className="flex-1 overflow-auto">
           {children}
         </div>
       </main>
