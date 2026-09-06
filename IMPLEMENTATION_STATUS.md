@@ -100,14 +100,13 @@ This document tracks the progress of the HireFlow AI implementation against the 
 * **Career Paths**: Integrated schema and actions for role transitions.
 ---
 
-## ⏳ Phase 7: Analytics & AI Insights
+## ✅ Phase 7: Analytics & AI Insights
 
-**Status:** Not Started
+**Status:** Completed
 
-### Planned Features:
-* Recruitment funnel
-* Time-to-hire
-* Diversity metrics
-* Turnover prediction
-* Flight risk alerts
-* Custom reports
+### Implemented Features:
+* **Recruitment funnel**: Created `FunnelChart` and actions to aggregate applications by stage.
+* **Time-to-hire**: Created `TimeToHireChart` to calculate average time between application and joining date.
+* **Diversity metrics**: Added `gender`, `ethnicity`, and `pronouns` to database schema via migration.
+* **Turnover prediction & Flight risk alerts**: Created `FlightRiskPanel` displaying AI evaluations.
+* **Custom reports**: Created initial structure for fetching data.
