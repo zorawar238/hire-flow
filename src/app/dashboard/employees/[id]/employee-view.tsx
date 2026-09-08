@@ -12,6 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { useState } from "react"
 import { initiateSeparationAction, createOffboardingTaskAction, finalizeSeparationAction } from "@/app/actions/separations"
 import PerformanceView from "./performance-view"
+import DocumentView from "./document-view"
 
 export default function EmployeeView({ employee }: { employee: any }) {
   const candidate = employee.candidates
@@ -68,9 +69,10 @@ export default function EmployeeView({ employee }: { employee: any }) {
       </div>
 
       <Tabs defaultValue="overview" className="w-full">
-        <TabsList className="grid w-[600px] grid-cols-3">
+        <TabsList className="grid w-[800px] grid-cols-4">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="performance">Performance</TabsTrigger>
+          <TabsTrigger value="documents">Documents</TabsTrigger>
           <TabsTrigger value="separation">Separation</TabsTrigger>
         </TabsList>
         
@@ -104,6 +106,10 @@ export default function EmployeeView({ employee }: { employee: any }) {
 
         <TabsContent value="performance" className="mt-4">
           <PerformanceView employee={employee} />
+        </TabsContent>
+
+        <TabsContent value="documents" className="mt-4">
+          <DocumentView employee={employee} />
         </TabsContent>
 
         <TabsContent value="separation" className="mt-4">
