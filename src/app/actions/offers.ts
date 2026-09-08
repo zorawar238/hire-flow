@@ -3,8 +3,22 @@
 import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 
+async function getCurrentUserRole(supabase: any) {
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return null
+  const { data } = await supabase.from('users').select('role').eq('id', user.id).single()
+  return data?.role
+}
+
 export async function createOfferAction(formData: FormData, applicationId: string) {
   const supabase = await createClient()
+  const role = await getCurrentUserRole(supabase)
+
+  // Enforce RBAC for offers (Salary details)
+  const allowedRoles = ['FINANCE_APPROVER', 'HR_HEAD', 'ORG_ADMIN', 'SUPER_ADMIN']
+  if (!role || !allowedRoles.includes(role)) {
+    return { error: 'Unauthorized: You do not have permission to create offers or set salary details.' }
+  }
 
   const baseSalary = parseFloat(formData.get('baseSalary') as string)
   const currency = formData.get('currency') as string || 'USD'
