@@ -153,7 +153,7 @@ export default function CreateJobPage() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Workplace Type</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select onValueChange={field.onChange} value={field.value}>
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Select type" />
@@ -175,7 +175,7 @@ export default function CreateJobPage() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Employment Type</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select onValueChange={field.onChange} value={field.value}>
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Select type" />

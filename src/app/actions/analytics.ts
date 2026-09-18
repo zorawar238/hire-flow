@@ -1,11 +1,11 @@
 "use server";
 
-import { createClient } from "@/utils/supabase/server";
+import { createClient } from "@/lib/supabase/server";
 import { generateText } from "ai";
 import { google } from "@ai-sdk/google";
 
 export async function getRecruitmentFunnel() {
-  const supabase = createClient();
+  const supabase = await createClient();
   
   const { data, error } = await supabase
     .from("candidate_applications")
@@ -37,11 +37,11 @@ export async function getRecruitmentFunnel() {
 }
 
 export async function getTimeToHire() {
-  const supabase = createClient();
+  const supabase = await createClient();
   
   const { data, error } = await supabase
     .from("employees")
-    .select("joining_date, created_at, candidate_applications!inner(created_at)")
+    .select("joining_date, created_at, candidates!inner(candidate_applications!inner(created_at))")
     .limit(100);
     
   if (error) {
@@ -53,10 +53,11 @@ export async function getTimeToHire() {
   // For simplicity, let's return average days per month for the last 6 months
   const monthlyData: Record<string, { totalDays: number, count: number }> = {};
   
-  data.forEach(emp => {
-    if (!emp.candidate_applications || !emp.candidate_applications.created_at || !emp.joining_date) return;
+  data.forEach((emp: any) => {
+    const applications = emp.candidates?.candidate_applications;
+    if (!applications || !applications[0]?.created_at || !emp.joining_date) return;
     
-    const appliedDate = new Date(emp.candidate_applications.created_at);
+    const appliedDate = new Date(applications[0].created_at);
     const joinDate = new Date(emp.joining_date);
     const monthYear = joinDate.toLocaleString('default', { month: 'short', year: 'numeric' });
     
@@ -76,7 +77,7 @@ export async function getTimeToHire() {
 }
 
 export async function getTurnoverPrediction() {
-  const supabase = createClient();
+  const supabase = await createClient();
   
   const { data: employees, error } = await supabase
     .from("employees")
@@ -89,8 +90,8 @@ export async function getTurnoverPrediction() {
       flight_risk_score,
       flight_risk_reason,
       performance_reviews (
-        overall_rating,
-        review_period
+        rating,
+        cycle_name
       )
     `)
     .eq("status", "ACTIVE")

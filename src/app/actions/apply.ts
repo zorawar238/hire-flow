@@ -1,10 +1,14 @@
 'use server'
 
-import { createClient } from '@/lib/supabase/server'
+import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 import { revalidatePath } from 'next/cache'
 
 export async function applyToJobAction(formData: FormData) {
-  const supabase = await createClient()
+  // Use the Service Role Key to bypass RLS for public form submissions
+  const supabase = createSupabaseClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
 
   const jobId = formData.get('jobId') as string
   const orgId = formData.get('orgId') as string

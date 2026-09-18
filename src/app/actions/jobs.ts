@@ -77,7 +77,7 @@ Keep it concise, engaging, and well-structured with bullet points.`
 
   try {
     const { text } = await generateText({
-      model: google('gemini-2.5-flash'),
+      model: google('gemini-3.6-flash'),
       prompt: prompt,
     })
 
