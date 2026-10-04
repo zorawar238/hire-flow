@@ -23,7 +23,8 @@ export default async function DashboardOverview() {
       change: "Active right now", 
       trend: "neutral",
       icon: Briefcase,
-      color: "from-blue-500 to-cyan-400"
+      color: "from-blue-500 to-cyan-400",
+      href: "/dashboard/jobs"
     },
     { 
       title: "New Applicants", 
@@ -31,7 +32,8 @@ export default async function DashboardOverview() {
       change: "In the last 7 days", 
       trend: "up",
       icon: Users,
-      color: "from-indigo-500 to-purple-500"
+      color: "from-indigo-500 to-purple-500",
+      href: "/dashboard/candidates"
     },
     { 
       title: "Interviews", 
@@ -39,7 +41,8 @@ export default async function DashboardOverview() {
       change: "Scheduled", 
       trend: "neutral",
       icon: Calendar,
-      color: "from-amber-400 to-orange-500"
+      color: "from-amber-400 to-orange-500",
+      href: "/dashboard/interviews"
     },
     { 
       title: "Offers Sent", 
@@ -47,7 +50,8 @@ export default async function DashboardOverview() {
       change: "Active offers", 
       trend: "neutral",
       icon: TrendingUp,
-      color: "from-emerald-400 to-teal-500"
+      color: "from-emerald-400 to-teal-500",
+      href: "/dashboard/candidates"
     },
   ]
 
@@ -73,9 +77,10 @@ export default async function DashboardOverview() {
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat, i) => (
-          <div 
+          <Link 
             key={stat.title}
-            className="group relative overflow-hidden rounded-2xl bg-white p-6 shadow-sm border border-slate-100 hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-300"
+            href={stat.href}
+            className="group relative overflow-hidden rounded-2xl bg-white p-6 shadow-sm border border-slate-100 hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-300 block"
           >
             {/* Background decorative gradient */}
             <div className={`absolute -right-12 -top-12 w-32 h-32 opacity-10 bg-gradient-to-br ${stat.color} rounded-full blur-2xl group-hover:opacity-20 transition-opacity`} />
@@ -102,7 +107,7 @@ export default async function DashboardOverview() {
                 {stat.change}
               </span>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 

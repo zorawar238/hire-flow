@@ -70,7 +70,7 @@ export default async function InterviewsPage() {
           <div className="flex items-center gap-2">
             {interview.meetingLink && interview.status === 'SCHEDULED' && (
               <a 
-                href={interview.meetingLink} 
+                href={interview.meetingLink.startsWith('http') ? interview.meetingLink : `https://${interview.meetingLink}`} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 rounded-lg text-sm font-medium transition-colors"
@@ -79,9 +79,14 @@ export default async function InterviewsPage() {
                 Join Meeting
               </a>
             )}
-            <button className="flex items-center gap-2 px-4 py-2 border border-slate-200 text-slate-700 hover:bg-slate-50 rounded-lg text-sm font-medium transition-colors">
-              View Details
-            </button>
+            {interview.applicationId && (
+              <Link 
+                href={`/dashboard/applications/${interview.applicationId}`}
+                className="flex items-center gap-2 px-4 py-2 border border-slate-200 text-slate-700 hover:bg-slate-50 rounded-lg text-sm font-medium transition-colors"
+              >
+                View Details
+              </Link>
+            )}
           </div>
         </div>
       </div>

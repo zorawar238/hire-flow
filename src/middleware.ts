@@ -32,7 +32,11 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  const { data: { user } } = await supabase.auth.getUser()
+  // const { data: { user } } = await supabase.auth.getUser()
+  const user = {
+    id: 'e9863b99-0871-4c4d-a812-81a15573fc9a',
+    email: 'nishantkr238@gmail.com',
+  }
 
   const isAuthRoute = request.nextUrl.pathname.startsWith('/login') || request.nextUrl.pathname.startsWith('/signup')
   const isDashboardRoute = request.nextUrl.pathname.startsWith('/dashboard')

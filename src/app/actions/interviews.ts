@@ -73,6 +73,7 @@ export async function getInterviewsAction() {
       meeting_link,
       status,
       candidate_applications!inner (
+        id,
         jobs!inner ( organization_id, title ),
         candidates ( full_name )
       ),
@@ -93,6 +94,7 @@ export async function getInterviewsAction() {
     duration: interview.duration_minutes,
     meetingLink: interview.meeting_link,
     status: interview.status,
+    applicationId: interview.candidate_applications?.id,
     candidateName: interview.candidate_applications?.candidates?.full_name || 'Unknown Candidate',
     jobTitle: interview.candidate_applications?.jobs?.title || 'Unknown Job',
     interviewerName: interview.users?.name || 'Unassigned'

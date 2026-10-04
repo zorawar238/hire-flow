@@ -45,7 +45,7 @@ Please evaluate the candidate's resume against the job description. Provide a Fi
 
   try {
     const { object } = await generateObject({
-      model: google('gemini-2.5-flash'),
+      model: google('gemini-3.5-flash'),
       schema: z.object({
         score: z.number().describe('A score from 0 to 100 indicating how well the candidate matches the job.'),
         strengths: z.array(z.string()).describe('List of key strengths and matching requirements found in the resume.'),

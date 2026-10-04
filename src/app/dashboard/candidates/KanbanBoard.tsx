@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd'
 import { updateCandidateStage } from '@/app/actions/candidates'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -19,6 +20,7 @@ const STAGES = [
 type Application = any 
 
 export default function KanbanBoard({ initialApplications }: { initialApplications: Application[] }) {
+  const router = useRouter()
   const [columns, setColumns] = useState<Record<string, Application[]>>({})
 
   // Initialize columns
@@ -99,7 +101,8 @@ export default function KanbanBoard({ initialApplications }: { initialApplicatio
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
-                          className={`mb-3 shadow-sm border ${snapshot.isDragging ? 'shadow-md border-blue-400' : 'border-gray-200'}`}
+                          onClick={() => router.push(`/dashboard/applications/${app.id}`)}
+                          className={`mb-3 shadow-sm border cursor-pointer hover:border-blue-300 transition-colors ${snapshot.isDragging ? 'shadow-md border-blue-400' : 'border-gray-200'}`}
                         >
                           <CardHeader className="p-4 pb-2">
                             <div className="flex justify-between items-start">

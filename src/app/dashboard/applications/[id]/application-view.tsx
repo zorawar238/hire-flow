@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { DateTimePicker } from "@/components/ui/datetime-picker"
 import Link from "next/link"
 import { useState } from "react"
 import { scheduleInterviewAction } from "@/app/actions/interviews"
@@ -14,7 +15,7 @@ import { createOfferAction } from "@/app/actions/offers"
 import { createPreboardingTaskAction, convertToEmployeeAction } from "@/app/actions/preboarding"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 export default function ApplicationView({ application, resume, users }: { application: any, resume: any, users: any[] }) {
   const candidate = application.candidates
   const job = application.jobs
@@ -103,30 +104,46 @@ export default function ApplicationView({ application, resume, users }: { applic
                   <CardDescription>Generated based on Resume vs Job Description</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {fitData.strengths && (
-                    <div>
-                      <h4 className="font-semibold text-green-700 mb-2">Strengths</h4>
-                      <ul className="list-disc pl-5 space-y-1 text-sm">
-                        {fitData.strengths.map((s: string, i: number) => <li key={i}>{s}</li>)}
-                      </ul>
-                    </div>
-                  )}
-                  {fitData.missing_info && (
-                    <div>
-                      <h4 className="font-semibold text-red-700 mb-2">Missing Information</h4>
-                      <ul className="list-disc pl-5 space-y-1 text-sm">
-                        {fitData.missing_info.map((s: string, i: number) => <li key={i}>{s}</li>)}
-                      </ul>
-                    </div>
-                  )}
-                  {fitData.concerns && (
-                    <div>
-                      <h4 className="font-semibold text-yellow-700 mb-2">Concerns</h4>
-                      <ul className="list-disc pl-5 space-y-1 text-sm">
-                        {fitData.concerns.map((s: string, i: number) => <li key={i}>{s}</li>)}
-                      </ul>
-                    </div>
-                  )}
+                  <Accordion type="multiple" className="w-full">
+                    {fitData.strengths && fitData.strengths.length > 0 && (
+                      <AccordionItem value="strengths">
+                        <AccordionTrigger className="text-green-700 hover:text-green-800">
+                          Strengths
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <ul className="list-disc pl-5 space-y-1 text-sm text-slate-700">
+                            {fitData.strengths.map((s: string, i: number) => <li key={i}>{s}</li>)}
+                          </ul>
+                        </AccordionContent>
+                      </AccordionItem>
+                    )}
+                    
+                    {fitData.missing_info && fitData.missing_info.length > 0 && (
+                      <AccordionItem value="missing">
+                        <AccordionTrigger className="text-red-700 hover:text-red-800">
+                          Missing Information
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <ul className="list-disc pl-5 space-y-1 text-sm text-slate-700">
+                            {fitData.missing_info.map((s: string, i: number) => <li key={i}>{s}</li>)}
+                          </ul>
+                        </AccordionContent>
+                      </AccordionItem>
+                    )}
+                    
+                    {fitData.concerns && fitData.concerns.length > 0 && (
+                      <AccordionItem value="concerns">
+                        <AccordionTrigger className="text-amber-700 hover:text-amber-800">
+                          Concerns
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <ul className="list-disc pl-5 space-y-1 text-sm text-slate-700">
+                            {fitData.concerns.map((s: string, i: number) => <li key={i}>{s}</li>)}
+                          </ul>
+                        </AccordionContent>
+                      </AccordionItem>
+                    )}
+                  </Accordion>
                 </CardContent>
               </Card>
 
@@ -198,7 +215,7 @@ export default function ApplicationView({ application, resume, users }: { applic
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="scheduledAt">Date & Time</Label>
-                      <Input id="scheduledAt" name="scheduledAt" type="datetime-local" required />
+                      <DateTimePicker id="scheduledAt" name="scheduledAt" required />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="duration">Duration (minutes)</Label>
@@ -209,7 +226,7 @@ export default function ApplicationView({ application, resume, users }: { applic
                       <Input id="meetingLink" name="meetingLink" type="url" placeholder="https://zoom.us/..." />
                     </div>
                     <Button type="submit" className="w-full" disabled={interviewLoading}>
-                      {interviewLoading ? "Scheduling..." : "Schedule"}
+                      {interviewLoading ? "Saving..." : "Save"}
                     </Button>
                   </form>
                 </DialogContent>

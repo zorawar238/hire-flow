@@ -54,12 +54,12 @@ export default function DocumentView({ employee }: { employee: any }) {
             <CardDescription>Securely store and manage HR documents</CardDescription>
           </div>
           <Dialog open={isUploadOpen} onOpenChange={setIsUploadOpen}>
-            <DialogTrigger asChild>
+            <DialogTrigger render={
               <Button className="flex items-center gap-2">
                 <UploadCloud className="w-4 h-4" />
                 Upload Document
               </Button>
-            </DialogTrigger>
+            } />
             <DialogContent>
               <DialogHeader>
                 <DialogTitle>Upload New Document</DialogTitle>
@@ -124,11 +124,9 @@ export default function DocumentView({ employee }: { employee: any }) {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Button variant="outline" size="sm" asChild className="h-8">
-                      <a href={doc.file_url} target="_blank" rel="noopener noreferrer">
-                        <Download className="w-4 h-4 mr-2" />
-                        View
-                      </a>
+                    <Button variant="outline" size="sm" className="h-8" render={<a href={doc.file_url} target="_blank" rel="noopener noreferrer" />}>
+                      <Download className="w-4 h-4 mr-2" />
+                      View
                     </Button>
                     <Button 
                       variant="ghost" 

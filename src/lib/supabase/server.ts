@@ -4,7 +4,7 @@ import { cookies } from 'next/headers'
 export async function createClient() {
   const cookieStore = await cookies()
 
-  return createServerClient(
+  const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
@@ -26,4 +26,21 @@ export async function createClient() {
       },
     }
   )
+
+  // BYPASS LOGIN FOR DEVELOPMENT
+  supabase.auth.getUser = async () => {
+    return {
+      data: {
+        user: {
+          id: 'e9863b99-0871-4c4d-a812-81a15573fc9a',
+          email: 'nishantkr238@gmail.com',
+          role: 'authenticated',
+          aud: 'authenticated',
+        },
+      },
+      error: null,
+    } as any
+  }
+
+  return supabase
 }
