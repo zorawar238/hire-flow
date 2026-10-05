@@ -104,7 +104,7 @@ export default function ApplicationView({ application, resume, users }: { applic
                   <CardDescription>Generated based on Resume vs Job Description</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <Accordion type="multiple" className="w-full">
+                  <Accordion className="w-full">
                     {fitData.strengths && fitData.strengths.length > 0 && (
                       <AccordionItem value="strengths">
                         <AccordionTrigger className="text-green-700 hover:text-green-800">
